@@ -5,10 +5,10 @@
 ## Todo
 
 - [x] swagger ada error
-- [ ] make schema check
-- [ ] buat endpoint update
-- [ ] buat endpoint detele
-- [ ] buat endpont post
+- [x] make schema check
+- [x] buat endpoint update
+- [x] buat endpoint detele
+- [x] buat endpont post
 - [ ] buat database postgress online
 - [ ] membuat table database
 - [ ] connect database with pg-promise
