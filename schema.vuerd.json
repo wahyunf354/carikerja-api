@@ -2,8 +2,8 @@
   "canvas": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": 0,
-    "scrollLeft": 0,
+    "scrollTop": 19,
+    "scrollLeft": 32,
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -47,13 +47,13 @@
             "default": "",
             "option": {
               "autoIncrement": false,
-              "primaryKey": false,
+              "primaryKey": true,
               "unique": false,
-              "notNull": false
+              "notNull": true
             },
             "ui": {
               "active": false,
-              "pk": false,
+              "pk": true,
               "fk": false,
               "pfk": false,
               "widthName": 61,
@@ -112,7 +112,7 @@
           {
             "name": "role",
             "comment": "",
-            "dataType": "",
+            "dataType": "varchar",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -131,17 +131,193 @@
               "widthDefault": 60
             },
             "id": "17bd25fc-d868-3ae4-885e-de12c2bd5646"
+          },
+          {
+            "name": "id_sosial_media",
+            "comment": "",
+            "dataType": "integer",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 97,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "f06bca63-58b3-7f3a-2c6c-cd219edfb632"
+          },
+          {
+            "name": "id_tect_stack",
+            "comment": "",
+            "dataType": "integer",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 79,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "f51f4cba-a653-cb80-c5d2-a2d99f63e942"
+          },
+          {
+            "name": "hired",
+            "comment": "",
+            "dataType": "boolean",
+            "default": "false",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "5dc0453d-93a2-7f28-df2d-d026e1555c31"
           }
         ],
         "ui": {
-          "active": true,
-          "left": 76,
-          "top": 287,
-          "zIndex": 27,
+          "active": false,
+          "left": 82,
+          "top": 142,
+          "zIndex": 91,
           "widthName": 62,
           "widthComment": 60
         },
         "id": "41eb4381-53ee-ac24-0f68-c744fa06fd54"
+      },
+      {
+        "name": "tb_sosial_media",
+        "comment": "",
+        "columns": [
+          {
+            "name": "id_sosial_media",
+            "comment": "",
+            "dataType": "integer",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 97,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "77ca0e99-030a-d7e7-88e3-427c47ca1910"
+          },
+          {
+            "name": "name_sosial_media",
+            "comment": "",
+            "dataType": "varchar",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 121,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "c74bffa4-ce9b-aeef-9e6c-e947826a865a"
+          },
+          {
+            "name": "url_sosial_media",
+            "comment": "",
+            "dataType": "varchar",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 103,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "77bc5a31-8adc-9a92-b65e-dac875c086f4"
+          },
+          {
+            "name": "id_people",
+            "comment": "",
+            "dataType": "integer",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 61,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "a7db487b-5563-fa50-08bf-896ddc927a85"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 81,
+          "top": 377,
+          "zIndex": 94,
+          "widthName": 99,
+          "widthComment": 60
+        },
+        "id": "a51b0c49-fefa-2ebf-f225-0fbe0aca5c27"
       }
     ],
     "indexes": []
