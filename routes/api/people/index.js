@@ -1,6 +1,9 @@
 "use strict";
+const PeopleDal = require("./peopleDal");
 
 module.exports = async function (fastify, opts) {
+  const peopleDal = PeopleDal(fastify.db);
+
   const schemaPeopleData = {
     type: "object",
     properties: {
@@ -81,7 +84,28 @@ module.exports = async function (fastify, opts) {
     schema: {
       tags: ["People"],
       description: "Endpoint to add data people",
-      body: schemaPeopleData,
+      body: {
+        type: "object",
+        properties: {
+          name: { type: "string" },
+          status: { type: "string" },
+          role: { type: "string" },
+          hired: { type: "boolean" },
+          tech_stack: {
+            type: "array",
+            items: {
+              type: "string",
+            },
+          },
+          sosial_media: {
+            type: "object",
+            properties: {
+              Linkedin: { type: "string" },
+              Github: { type: "string" },
+            },
+          },
+        },
+      },
       response: {
         200: {
           type: "object",
@@ -92,22 +116,11 @@ module.exports = async function (fastify, opts) {
         },
       },
     },
-    handler: (request, reply) => {
-      return {
-        status: 204,
-        data: {
-          name: "Lelianto Eko Pradana",
-          status: "Fulltime",
-          role: "Front End Web Developer",
-          location: "Jakarta",
-          social_media: {
-            Linkedin: "https://www.linkedin.com/in/lelianto1/",
-            Github: "https://github.com/Lelianto",
-          },
-          tech_stack: ["React.js", "Nuxt.js", "Python", "Flask", "Javascript"],
-          hired: false,
-        },
-      };
+    handler: async (request, reply) => {
+      const data = request.body;
+      const newPeople = await peopleDal.createPeople(data);
+
+      return newPeople;
     },
   });
 

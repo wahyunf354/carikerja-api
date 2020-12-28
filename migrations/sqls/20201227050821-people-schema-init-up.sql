@@ -14,7 +14,7 @@ CREATE TABLE tb_sosial_media (
 );
 CREATE TABLE tb_tect_stack (
   id_tect_stack SERIAL PRIMARY KEY,
-  name_tact_stack varchar,
+  name_tect_stack varchar,
   id_people SERIAL
 );
 ALTER TABLE tb_sosial_media
