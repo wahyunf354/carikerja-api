@@ -1,7 +1,9 @@
 "use strict";
 
 const fp = require("fastify-plugin");
-const pgp = require("pg-promise")();
+const pgp = require("pg-promise")({
+  capSQL: true,
+});
 const appConfig = require("../config/appConfig");
 
 module.exports = fp(async function (fastify, opts) {

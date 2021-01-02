@@ -11,6 +11,8 @@ module.exports = async function (fastify, opts) {
       name: { type: "string" },
       status: { type: "string" },
       role: { type: "string" },
+      location: { type: "string" },
+      status: { type: "string" },
       hired: { type: "boolean" },
       tech_stack: {
         type: "array",
@@ -18,7 +20,7 @@ module.exports = async function (fastify, opts) {
           type: "string",
         },
       },
-      sosial_media: {
+      social_media: {
         type: "object",
         properties: {
           Linkedin: { type: "string" },
@@ -97,7 +99,7 @@ module.exports = async function (fastify, opts) {
               type: "string",
             },
           },
-          sosial_media: {
+          social_media: {
             type: "object",
             properties: {
               Linkedin: { type: "string" },
@@ -120,7 +122,7 @@ module.exports = async function (fastify, opts) {
       const data = request.body;
       const newPeople = await peopleDal.createPeople(data);
 
-      return newPeople;
+      reply.send({ status: 200, data: newPeople });
     },
   });
 
