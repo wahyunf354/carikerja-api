@@ -14,13 +14,13 @@ module.exports = async function (fastify, opts) {
       location: { type: "string" },
       status: { type: "string" },
       hired: { type: "boolean" },
-      tech_stack: {
+      tect_stack: {
         type: "array",
         items: {
           type: "string",
         },
       },
-      social_media: {
+      sosial_media: {
         type: "object",
         properties: {
           Linkedin: { type: "string" },
@@ -30,33 +30,36 @@ module.exports = async function (fastify, opts) {
     },
   };
 
+  // get all people
   fastify.route({
     url: "/",
     method: "GET",
     schema: {
       tags: ["People"],
       description: "Endpoint get data people",
-      // response: {
-      //   200: {
-      //     type: "object",
-      //     properties: {
-      //       status: {
-      //         type: "number",
-      //       },
-      //       data: {
-      //         description: "Successful response",
-      //         type: "array",
-      //         items: schemaPeopleData,
-      //       },
-      //     },
-      //   },
-      // },
+      response: {
+        200: {
+          type: "object",
+          properties: {
+            status: {
+              type: "number",
+            },
+            data: {
+              description: "Successful response",
+              type: "array",
+              items: schemaPeopleData,
+            },
+          },
+        },
+      },
     },
-    handler: (request, reply) => {
-      return peopleDal.getAllPeople();
+    handler: async (request, reply) => {
+      const data = await peopleDal.getAllPeople();
+      return { status: 200, data };
     },
   });
 
+  // create data people
   fastify.route({
     url: "/",
     method: "POST",
@@ -70,13 +73,13 @@ module.exports = async function (fastify, opts) {
           status: { type: "string" },
           role: { type: "string" },
           hired: { type: "boolean" },
-          tech_stack: {
+          tect_stack: {
             type: "array",
             items: {
               type: "string",
             },
           },
-          social_media: {
+          sosial_media: {
             type: "object",
             properties: {
               Linkedin: { type: "string" },
@@ -129,22 +132,11 @@ module.exports = async function (fastify, opts) {
         },
       },
     },
-    handler: (request, replay) => {
-      return {
-        status: 200,
-        data: {
-          name: "Lelianto Eko Pradana",
-          status: "Fulltime",
-          role: "Front End Web Developer",
-          location: "Jakarta",
-          social_media: {
-            Linkedin: "https://www.linkedin.com/in/lelianto1/",
-            Github: "https://github.com/Lelianto",
-          },
-          tech_stack: ["React.js", "Nuxt.js", "Python", "Flask", "Javascript"],
-          hired: false,
-        },
-      };
+    handler: async (request, reply) => {
+      const data = request.body;
+      const { id } = request.params;
+      const resultUpdate = await peopleDal.updatePeople(id, data);
+      reply.send({ status: 200, data: resultUpdate });
     },
   });
 
@@ -173,11 +165,10 @@ module.exports = async function (fastify, opts) {
         },
       },
     },
-    handler: (request, replay) => {
-      return {
-        status: 204,
-        message: "Successful delete schema",
-      };
+    handler: async (request, replay) => {
+      const { id } = request.params;
+      const resultDelete = await peopleDal.deletePeople(id);
+      return { status: 204, ...resultDelete };
     },
   });
 };

@@ -3,111 +3,57 @@ const pgp = require("pg-promise")({
 });
 
 const PeopleDal = (db) => {
-  const createPeople = async ({
-    name,
-    role,
-    location,
-    status,
-    social_media,
-    tech_stack,
-  }) => {
+  const createPeople = async (data) => {
     try {
-      // insert people
-      const {
-        id_people,
-      } = await db.one(
-        "INSERT INTO tb_people(name, role, location, status) VALUES ($1, $2, $3, $4) RETURNING id_people",
-        [name, role, location, status]
+      const { id } = await db.one(
+        "INSERT INTO tb_people( name, role,location, status, sosial_media,tect_stack) VALUES (${name},${role},${location},${status},${sosial_media},${tect_stack}) RETURNING id",
+        data
       );
-
-      // insert social media
-      const columnSetSosialMedia = new pgp.helpers.ColumnSet(
-        ["name_sosial_media", "url_sosial_media", "id_people"],
-        { table: "tb_sosial_media" }
-      );
-      const namesSosialMedia = Object.keys(social_media);
-
-      let valuesSosialMedia = [];
-      namesSosialMedia.forEach((e) => {
-        valuesSosialMedia.push({
-          name_sosial_media: e,
-          url_sosial_media: social_media[e],
-          id_people: id_people,
-        });
-      });
-
-      const queryInsertSosialMedia = pgp.helpers.insert(
-        valuesSosialMedia,
-        columnSetSosialMedia
-      );
-      await db.none(queryInsertSosialMedia);
-
-      // insert tect_stack
-      const columnSetTectStack = new pgp.helpers.ColumnSet(
-        ["name_tect_stack", "id_people"],
-        { table: "tb_tect_stack" }
-      );
-
-      let valuesTectStack = [];
-      tech_stack.forEach((e) => {
-        valuesTectStack.push({
-          name_tect_stack: e,
-          id_people: id_people,
-        });
-      });
-
-      const queryInsertTectStack = pgp.helpers.insert(
-        valuesTectStack,
-        columnSetTectStack
-      );
-      await db.none(queryInsertTectStack);
-
       return {
-        id: id_people,
-        name,
-        role,
-        location,
-        status,
-        social_media,
-        tech_stack,
+        id,
         hired: false,
+        ...data,
       };
     } catch (err) {
-      console.log("Create People:" + err);
+      throw new Error("Create People:" + err);
     }
   };
 
   const getAllPeople = async () => {
-    let data = [];
-    const result = await db.any("SELECT * FROM tb_people");
-    result.forEach(async (e) => {
-      const { id_people, name, role, hired, location, status } = e;
-      const tectStack = await db.any(
-        "SELECT name_tect_stack FROM tb_tect_stack WHERE id_people=$1",
-        [id_people]
-      );
-      const sosialMedia = await db.any(
-        "SELECT * FROM tb_sosial_media WHERE id_people=$1",
-        [id_people]
-      );
-      data.push({
-        id: id_people,
-        name,
-        role,
-        hired,
-        location,
-        status,
-        tech_stack: tectStack,
-        sosial_media: {
-          [sosialMedia.name_sosial_media]: sosialMedia.url_sosial_media,
-        },
-      });
-    });
-    return data;
+    try {
+      const data = await db.any("SELECT * FROM tb_people");
+      return data;
+    } catch (err) {
+      throw new Error("Get All People:" + err);
+    }
   };
 
-  const updatePeople = (id) => {};
-  const deletePeople = (id) => {};
+  const updatePeople = async (id, data) => {
+    try {
+      await db.none(
+        "UPDATE tb_people SET name=${name}, role=${role}, location=${location}, hired=${hired}, status=${status}, sosial_media=${sosial_media}, tect_stack=${tect_stack} WHERE id=${id}",
+        { ...data, id }
+      );
+
+      return {
+        id,
+        ...data,
+      };
+    } catch (err) {
+      throw new Error("Update People:" + err);
+    }
+  };
+
+  const deletePeople = async (id) => {
+    try {
+      await db.none("DELETE FROM tb_people WHERE id=$1", [id]);
+      return {
+        message: "Successful delete schema",
+      };
+    } catch (err) {
+      throw new Error("Delete People:" + err);
+    }
+  };
 
   return { createPeople, getAllPeople, updatePeople, deletePeople };
 };
