@@ -15,8 +15,8 @@
 - [x] make migration with db-migrate
 - [x] membuat table database
 - [x] connect database with pg-promise
-- [ ] make function create people
-- [ ] make function delete people
-- [ ] make function get All people
+- [x] make function create people
+- [x] make function delete people
+- [x] make function get All people
 - [ ] make function get by id people
-- [ ] make function update people
+- [x] make function update people
