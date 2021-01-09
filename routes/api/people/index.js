@@ -36,47 +36,24 @@ module.exports = async function (fastify, opts) {
     schema: {
       tags: ["People"],
       description: "Endpoint get data people",
-      response: {
-        200: {
-          type: "object",
-          properties: {
-            status: {
-              type: "number",
-            },
-            data: {
-              description: "Successful response",
-              type: "array",
-              items: schemaPeopleData,
-            },
-          },
-        },
-      },
+      // response: {
+      //   200: {
+      //     type: "object",
+      //     properties: {
+      //       status: {
+      //         type: "number",
+      //       },
+      //       data: {
+      //         description: "Successful response",
+      //         type: "array",
+      //         items: schemaPeopleData,
+      //       },
+      //     },
+      //   },
+      // },
     },
     handler: (request, reply) => {
-      return {
-        status: 200,
-        data: [
-          {
-            id: 1,
-            name: "Lelianto Eko Pradana",
-            status: "Fulltime",
-            role: "Front End Web Developer",
-            location: "Jakarta",
-            social_media: {
-              Linkedin: "https://www.linkedin.com/in/lelianto1/",
-              Github: "https://github.com/Lelianto",
-            },
-            tech_stack: [
-              "React.js",
-              "Nuxt.js",
-              "Python",
-              "Flask",
-              "Javascript",
-            ],
-            hired: true,
-          },
-        ],
-      };
+      return peopleDal.getAllPeople();
     },
   });
 

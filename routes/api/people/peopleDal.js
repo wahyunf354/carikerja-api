@@ -63,7 +63,7 @@ const PeopleDal = (db) => {
       await db.none(queryInsertTectStack);
 
       return {
-        id_people,
+        id: id_people,
         name,
         role,
         location,
@@ -77,7 +77,35 @@ const PeopleDal = (db) => {
     }
   };
 
-  const getAllPeople = () => {};
+  const getAllPeople = async () => {
+    let data = [];
+    const result = await db.any("SELECT * FROM tb_people");
+    result.forEach(async (e) => {
+      const { id_people, name, role, hired, location, status } = e;
+      const tectStack = await db.any(
+        "SELECT name_tect_stack FROM tb_tect_stack WHERE id_people=$1",
+        [id_people]
+      );
+      const sosialMedia = await db.any(
+        "SELECT * FROM tb_sosial_media WHERE id_people=$1",
+        [id_people]
+      );
+      data.push({
+        id: id_people,
+        name,
+        role,
+        hired,
+        location,
+        status,
+        tech_stack: tectStack,
+        sosial_media: {
+          [sosialMedia.name_sosial_media]: sosialMedia.url_sosial_media,
+        },
+      });
+    });
+    return data;
+  };
+
   const updatePeople = (id) => {};
   const deletePeople = (id) => {};
 
