@@ -50,3 +50,30 @@
 - [ ] testing function getPeopleById
 - [ ] testing function updatePeople
 - [ ] testing function deletePeople
+
+### Employer
+
+#### make schema endpoint
+
+- [ ] createEmployer
+- [ ] getAllEmployer
+- [ ] getEmployerById
+- [ ] updateEmployer
+- [ ] deleteEmployer
+
+#### make function to matifulate date
+
+- [ ] createEmployer
+- [ ] getAllEmployer
+- [ ] getEmployerById
+- [ ] updateEmployer
+- [ ] deleteEmployer
+
+#### connect to db
+
+- [ ] refactoring db migrate
+
+#### make testing
+
+- [ ] setup test
+- [ ] make test
