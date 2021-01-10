@@ -1,7 +1,7 @@
 "use strict";
 const PeopleDal = require("./peopleDal");
 
-module.exports = async function (fastify, opts) {
+module.exports = async function (fastify) {
   const peopleDal = PeopleDal(fastify.db);
 
   const schemaPeopleData = {
@@ -53,9 +53,37 @@ module.exports = async function (fastify, opts) {
         },
       },
     },
-    handler: async (request, reply) => {
+    handler: async () => {
       const data = await peopleDal.getAllPeople();
       return { status: 200, data };
+    },
+  });
+
+  fastify.route({
+    url: "/:id",
+    method: "GET",
+    schema: {
+      tags: ["People"],
+      description: "Endpoint to get data people by id",
+      response: {
+        200: {
+          type: "object",
+          properties: {
+            status: {
+              type: "number",
+            },
+            data: {
+              description: "Successful response",
+              ...schemaPeopleData,
+            },
+          },
+        },
+      },
+    },
+    handler: async (request) => {
+      const { id } = request.params;
+      const resultGet = await peopleDal.getPeopleById(id);
+      return { status: 200, data: resultGet[0] };
     },
   });
 
@@ -101,7 +129,6 @@ module.exports = async function (fastify, opts) {
     handler: async (request, reply) => {
       const data = request.body;
       const newPeople = await peopleDal.createPeople(data);
-
       reply.send({ status: 200, data: newPeople });
     },
   });
@@ -165,7 +192,7 @@ module.exports = async function (fastify, opts) {
         },
       },
     },
-    handler: async (request, replay) => {
+    handler: async (request) => {
       const { id } = request.params;
       const resultDelete = await peopleDal.deletePeople(id);
       return { status: 204, ...resultDelete };

@@ -28,6 +28,16 @@ const PeopleDal = (db) => {
     }
   };
 
+  const getPeopleById = async (id) => {
+    try {
+      const data = await db.any("SELECT * FROM tb_people WHERE id=$1", [id]);
+
+      return data;
+    } catch (err) {
+      throw new Error("Get People By Id:" + err);
+    }
+  };
+
   const updatePeople = async (id, data) => {
     try {
       await db.none(
@@ -55,7 +65,13 @@ const PeopleDal = (db) => {
     }
   };
 
-  return { createPeople, getAllPeople, updatePeople, deletePeople };
+  return {
+    createPeople,
+    getPeopleById,
+    getAllPeople,
+    updatePeople,
+    deletePeople,
+  };
 };
 
 module.exports = PeopleDal;
