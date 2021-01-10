@@ -59,4 +59,8 @@ profile*
 
 
 cari-kerja.session.sql
+docker-local-pg.session.sql
 .env
+
+# docker volume
+data

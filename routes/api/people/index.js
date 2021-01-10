@@ -65,6 +65,15 @@ module.exports = async function (fastify) {
     schema: {
       tags: ["People"],
       description: "Endpoint to get data people by id",
+      params: {
+        type: "object",
+        required: ["id"],
+        properties: {
+          id: {
+            type: "number",
+          },
+        },
+      },
       response: {
         200: {
           type: "object",
@@ -133,6 +142,7 @@ module.exports = async function (fastify) {
     },
   });
 
+  // update data people
   fastify.route({
     url: "/:id",
     method: "PUT",

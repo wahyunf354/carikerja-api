@@ -2,6 +2,14 @@
 
 ## About
 
+> by Wahyu Nur Fadillah
+
+## Usage
+
+### Enpoint
+
+---
+
 ## Todo
 
 ### Endpoint People
