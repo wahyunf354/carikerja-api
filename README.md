@@ -63,7 +63,7 @@
 
 #### make schema endpoint
 
-- [ ] createEmployer
+- [x] createEmployer
 - [ ] getAllEmployer
 - [ ] getEmployerById
 - [ ] updateEmployer
@@ -71,7 +71,7 @@
 
 #### make function to matifulate date
 
-- [ ] createEmployer
+- [x] createEmployer
 - [ ] getAllEmployer
 - [ ] getEmployerById
 - [ ] updateEmployer
