@@ -1,7 +1,3 @@
-const pgp = require("pg-promise")({
-  capSQL: true,
-});
-
 const PeopleDal = (db) => {
   const createPeople = async (data) => {
     try {

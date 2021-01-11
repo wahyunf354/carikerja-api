@@ -4,7 +4,6 @@ const fp = require("fastify-plugin");
 
 module.exports = fp(async function (fastify, opts) {
   fastify.register(require("fastify-swagger"), {
-    // FIXME: ERROR failed to fetch in swagger documentation
     routePrefix: "/documentation",
     swagger: {
       info: {
