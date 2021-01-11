@@ -78,4 +78,41 @@ module.exports = async function (fastify) {
       return { status: 200, data: data };
     },
   });
+
+  fastify.route({
+    url: "/:id",
+    shcema: {
+      tags: ["Employer"],
+      description: ["Get one employer"],
+      params: {
+        type: "object",
+        properties: {
+          id: { type: "object" },
+        },
+      },
+      response: {
+        200: {
+          type: "object",
+          properties: {
+            data: {
+              type: "object",
+              properties: {
+                id: { type: "number" },
+                name: { type: "string" },
+                category: { type: "string" },
+                link: { type: "string" },
+                description: { type: "string" },
+              },
+            },
+          },
+        },
+      },
+    },
+    handler: async (request, reply) => {
+      const { id } = request.params;
+      const data = employerDal.getEmployerById(id);
+
+      return { status: 200, data };
+    },
+  });
 };

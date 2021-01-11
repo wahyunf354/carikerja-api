@@ -22,6 +22,9 @@ const EmployerDal = (db) => {
       throw new Error("Get All Employer : ", err);
     }
   };
+
+  const getEmployerById = async () => {};
+
   return { createEmployer, getAllEmployer };
 };
 
