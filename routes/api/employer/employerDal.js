@@ -14,7 +14,15 @@ const EmployerDal = (db) => {
     }
   };
 
-  return { createEmployer };
+  const getAllEmployer = async () => {
+    try {
+      const data = await db.any("SELECT * FROM tb_employer");
+      return data;
+    } catch (err) {
+      throw new Error("Get All Employer : ", err);
+    }
+  };
+  return { createEmployer, getAllEmployer };
 };
 
 module.exports = EmployerDal;

@@ -44,4 +44,38 @@ module.exports = async function (fastify) {
       reply.send({ status: 200, data: newEmployer });
     },
   });
+
+  fastify.route({
+    url: "/",
+    method: "GET",
+    schema: {
+      tags: ["Employer"],
+      description: "Get all employer",
+      response: {
+        200: {
+          type: "object",
+          properties: {
+            status: { type: "number" },
+            data: {
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  id: { type: "number" },
+                  name: { type: "string" },
+                  category: { type: "string" },
+                  link: { type: "string" },
+                  description: { type: "string" },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    handler: async () => {
+      const data = await employerDal.getAllEmployer();
+      return { status: 200, data: data };
+    },
+  });
 };
