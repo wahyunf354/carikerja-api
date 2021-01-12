@@ -14,13 +14,13 @@ module.exports = async function (fastify) {
       location: { type: "string" },
       status: { type: "string" },
       hired: { type: "boolean" },
-      tect_stack: {
+      tech_stack: {
         type: "array",
         items: {
           type: "string",
         },
       },
-      sosial_media: {
+      social_media: {
         type: "object",
         properties: {
           Linkedin: { type: "string" },
@@ -110,13 +110,13 @@ module.exports = async function (fastify) {
           status: { type: "string" },
           role: { type: "string" },
           hired: { type: "boolean" },
-          tect_stack: {
+          tech_stack: {
             type: "array",
             items: {
               type: "string",
             },
           },
-          sosial_media: {
+          social_media: {
             type: "object",
             properties: {
               Linkedin: { type: "string" },

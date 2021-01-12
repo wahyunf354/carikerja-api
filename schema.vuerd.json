@@ -179,7 +179,7 @@
             "id": "cf64eaf3-6eba-fb65-1fa5-8a305a04baa6"
           },
           {
-            "name": "sosial_media",
+            "name": "social_media",
             "comment": "",
             "dataType": "json",
             "default": "",
@@ -213,11 +213,11 @@
         "id": "41eb4381-53ee-ac24-0f68-c744fa06fd54"
       },
       {
-        "name": "tb_tect_stack",
+        "name": "tb_tech_stack",
         "comment": "",
         "columns": [
           {
-            "name": "id_tect_stack",
+            "name": "id_tech_stack",
             "comment": "",
             "dataType": "integer",
             "default": "",
@@ -404,7 +404,7 @@
         "id": "eba73adf-8172-2646-acdf-5d27e62d8327"
       },
       {
-        "name": "tb_people_tb_tect_stack",
+        "name": "tb_people_tb_tech_stack",
         "comment": "",
         "columns": [
           {
@@ -454,7 +454,7 @@
             "id": "152e789d-7ddb-d2ee-d327-05d9bb5d7606"
           },
           {
-            "name": "id_tect_stack",
+            "name": "id_tech_stack",
             "comment": "",
             "dataType": "integer",
             "default": "",
@@ -499,18 +499,14 @@
         "identification": false,
         "start": {
           "tableId": "41eb4381-53ee-ac24-0f68-c744fa06fd54",
-          "columnIds": [
-            "0bbeced4-8bfa-88df-3e4a-edd28db8db36"
-          ],
+          "columnIds": ["0bbeced4-8bfa-88df-3e4a-edd28db8db36"],
           "x": 379.1666712694696,
           "y": 232.25000079472855,
           "direction": "right"
         },
         "end": {
           "tableId": "3cbd2b3b-ef5d-f7da-266b-ecde381fcd8d",
-          "columnIds": [
-            "152e789d-7ddb-d2ee-d327-05d9bb5d7606"
-          ],
+          "columnIds": ["152e789d-7ddb-d2ee-d327-05d9bb5d7606"],
           "x": 494.9999866154458,
           "y": 101.08333588308786,
           "direction": "left"
@@ -522,18 +518,14 @@
         "identification": false,
         "start": {
           "tableId": "53ecbcb7-0312-7e7e-284d-4f238c87b908",
-          "columnIds": [
-            "f679c360-d9a6-68f1-c45c-2afb3959c838"
-          ],
+          "columnIds": ["f679c360-d9a6-68f1-c45c-2afb3959c838"],
           "x": 680.6666711701296,
           "y": 305.33332505491063,
           "direction": "top"
         },
         "end": {
           "tableId": "3cbd2b3b-ef5d-f7da-266b-ecde381fcd8d",
-          "columnIds": [
-            "1f86fbe9-5cb3-8199-3fa4-744652338f3a"
-          ],
+          "columnIds": ["1f86fbe9-5cb3-8199-3fa4-744652338f3a"],
           "x": 677.9999866154458,
           "y": 166.33333588308784,
           "direction": "bottom"

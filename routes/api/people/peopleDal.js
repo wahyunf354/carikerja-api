@@ -2,7 +2,7 @@ const PeopleDal = (db) => {
   const createPeople = async (data) => {
     try {
       const { id } = await db.one(
-        "INSERT INTO tb_people( name, role,location, status, sosial_media,tect_stack) VALUES (${name},${role},${location},${status},${sosial_media},${tect_stack}) RETURNING id",
+        "INSERT INTO tb_people( name, role,location, status, social_media,tech_stack) VALUES (${name},${role},${location},${status},${social_media},${tech_stack}) RETURNING id",
         data
       );
       return {
@@ -37,7 +37,7 @@ const PeopleDal = (db) => {
   const updatePeople = async (id, data) => {
     try {
       await db.none(
-        "UPDATE tb_people SET name=${name}, role=${role}, location=${location}, hired=${hired}, status=${status}, sosial_media=${sosial_media}, tect_stack=${tect_stack} WHERE id=${id}",
+        "UPDATE tb_people SET name=${name}, role=${role}, location=${location}, hired=${hired}, status=${status}, social_media=${social_media}, tech_stack=${tech_stack} WHERE id=${id}",
         { ...data, id }
       );
 
