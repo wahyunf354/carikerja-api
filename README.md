@@ -43,6 +43,7 @@
 
 #### handle error
 
+- [ ] fix a bug post data people and data employer for data null handle
 - [ ] make handel error in endpoint people
 - [ ] in create
 - [ ] in getAll
