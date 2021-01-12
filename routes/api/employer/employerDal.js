@@ -23,9 +23,16 @@ const EmployerDal = (db) => {
     }
   };
 
-  const getEmployerById = async () => {};
+  const getEmployerById = async (id) => {
+    try {
+      const data = await db.any("SELECT * FROM tb_employer WHERE id=$1", [id]);
+      return data[0];
+    } catch (err) {
+      throw new Error("Get employer by Id: ", err);
+    }
+  };
 
-  return { createEmployer, getAllEmployer };
+  return { createEmployer, getAllEmployer, getEmployerById };
 };
 
 module.exports = EmployerDal;

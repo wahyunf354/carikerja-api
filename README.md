@@ -23,7 +23,7 @@
 - [x] buat endpoint update
 - [x] buat endpoint detele
 - [x] buat endpont post
-- [ ] swagger fix error
+- [x] swagger fix error
 
 #### connect db
 
@@ -64,16 +64,16 @@
 #### make schema endpoint
 
 - [x] createEmployer
-- [ ] getAllEmployer
-- [ ] getEmployerById
+- [x] getAllEmployer
+- [x] getEmployerById
 - [ ] updateEmployer
 - [ ] deleteEmployer
 
 #### make function to matifulate date
 
 - [x] createEmployer
-- [ ] getAllEmployer
-- [ ] getEmployerById
+- [x] getAllEmployer
+- [x] getEmployerById
 - [ ] updateEmployer
 - [ ] deleteEmployer
 

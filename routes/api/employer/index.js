@@ -81,19 +81,21 @@ module.exports = async function (fastify) {
 
   fastify.route({
     url: "/:id",
-    shcema: {
+    method: "GET",
+    schema: {
       tags: ["Employer"],
       description: ["Get one employer"],
       params: {
         type: "object",
         properties: {
-          id: { type: "object" },
+          id: { type: "number" },
         },
       },
       response: {
         200: {
           type: "object",
           properties: {
+            status: { type: "number" },
             data: {
               type: "object",
               properties: {
@@ -108,9 +110,9 @@ module.exports = async function (fastify) {
         },
       },
     },
-    handler: async (request, reply) => {
+    handler: async (request) => {
       const { id } = request.params;
-      const data = employerDal.getEmployerById(id);
+      const data = await employerDal.getEmployerById(id);
 
       return { status: 200, data };
     },
