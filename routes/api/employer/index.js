@@ -117,4 +117,90 @@ module.exports = async function (fastify) {
       return { status: 200, data };
     },
   });
+
+  fastify.route({
+    url: "/:id",
+    method: "PUT",
+    schema: {
+      tags: ["Employer"],
+      description: "Endpoint to update data employer",
+      params: {
+        type: "object",
+        properties: {
+          id: { type: "number" },
+        },
+      },
+      body: {
+        type: "object",
+        properties: {
+          name: { type: "string" },
+          category: { type: "string" },
+          linkg: { type: "string" },
+          description: { type: "string" },
+        },
+      },
+      response: {
+        200: {
+          type: "object",
+          properties: {
+            status: { type: "number" },
+            data: {
+              type: "object",
+              properties: {
+                id: { type: "number" },
+                name: { type: "string" },
+                category: { type: "string" },
+                link: { type: "string" },
+                description: { type: "string" },
+              },
+            },
+          },
+        },
+      },
+    },
+    handler: async (request, reply) => {
+      const { id } = request.params;
+      const { body } = request;
+      const data = await employerDal.updateEmployer(id, body);
+
+      return { status: 200, data };
+    },
+  });
+
+  fastify.route({
+    url: "/:id",
+    method: "DELETE",
+    schema: {
+      tags: ["Employer"],
+      description: "Delete data employer",
+      params: {
+        type: "object",
+        required: ["id"],
+        properties: {
+          id: {
+            type: "number",
+          },
+        },
+      },
+      response: {
+        200: {
+          type: "object",
+          properties: {
+            status: {
+              type: "number",
+            },
+            message: {
+              type: "string",
+            },
+          },
+        },
+      },
+    },
+    handler: async (request) => {
+      const { id } = request.params;
+      const message = await employerDal.deleteEmployerById(id);
+
+      return { status: 204, ...message };
+    },
+  });
 };

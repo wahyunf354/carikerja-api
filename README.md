@@ -66,16 +66,16 @@
 - [x] createEmployer
 - [x] getAllEmployer
 - [x] getEmployerById
-- [ ] updateEmployer
-- [ ] deleteEmployer
+- [x] updateEmployer
+- [x] deleteEmployer
 
 #### make function to matifulate date
 
 - [x] createEmployer
 - [x] getAllEmployer
 - [x] getEmployerById
-- [ ] updateEmployer
-- [ ] deleteEmployer
+- [x] updateEmployer
+- [x] deleteEmployer
 
 #### connect to db
 
