@@ -6,12 +6,18 @@ const PeopleDal = (db) => {
         data
       );
       return {
-        id,
-        hired: false,
-        ...data,
+        status: 200,
+        data: {
+          id,
+          hired: false,
+          ...data,
+        },
       };
     } catch (err) {
-      throw new Error("Create People:" + err);
+      return {
+        status: 500,
+        message: err.massage,
+      };
     }
   };
 

@@ -105,6 +105,7 @@ module.exports = async function (fastify) {
       description: "Endpoint to add data people",
       body: {
         type: "object",
+        required: ["name", "status", "role", "tech_stack", "social_media"],
         properties: {
           name: { type: "string" },
           status: { type: "string" },
@@ -137,8 +138,8 @@ module.exports = async function (fastify) {
     },
     handler: async (request, reply) => {
       const data = request.body;
-      const newPeople = await peopleDal.createPeople(data);
-      reply.send({ status: 200, data: newPeople });
+      const result = await peopleDal.createPeople(data);
+      reply.send(result);
     },
   });
 
