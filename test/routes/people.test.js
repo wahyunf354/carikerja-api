@@ -133,8 +133,51 @@ describe("GET data all People", () => {
       method: "GET",
       url: "/api/people",
     });
-    console.warn(serverResponse.json());
     expect(serverResponse.json().data[0].name).toEqual(requestPayload.name);
     expect(serverResponse.json().data[0].id).toBeDefined();
+  });
+});
+
+describe("UPDATE endpoint people", () => {
+  test("update hired properties", async () => {
+    const requestPayload = {
+      name: "Lelianto Eko Pradana",
+      status: "Fulltime",
+      role: "Front End Web Developer",
+      location: "Jakarta",
+      social_media: {
+        Linkedin: "https://www.linkedin.com/in/lelianto1/",
+        Github: "https://github.com/Lelianto",
+      },
+      tech_stack: ["React.js", "Nuxt.js", "Python", "Flask", "Javascript"],
+    };
+
+    const requestPayloadUpdate = {
+      name: "Lelianto Eko Pradana",
+      status: "Fulltime",
+      role: "Front End Web Developer",
+      location: "Jakarta",
+      social_media: {
+        Linkedin: "https://www.linkedin.com/in/lelianto1/",
+        Github: "https://github.com/Lelianto",
+      },
+      hired: true,
+      tech_stack: ["React.js", "Nuxt.js", "Python", "Flask", "Javascript"],
+    };
+
+    const postResponse = await fastify.inject({
+      method: "POST",
+      url: "/api/people",
+      payload: requestPayload,
+    });
+
+    const serverResponse = await fastify.inject({
+      method: "PUT",
+      url: `/api/people/${Number(postResponse.json().data.id)}`,
+      payload: requestPayloadUpdate,
+    });
+
+    expect(serverResponse.statusCode).toEqual(200);
+    expect(serverResponse.json().data.hired).toBeTruthy;
   });
 });
