@@ -54,8 +54,8 @@ module.exports = async function (fastify) {
       },
     },
     handler: async () => {
-      const data = await peopleDal.getAllPeople();
-      return { status: 200, data };
+      const result = await peopleDal.getAllPeople();
+      return result;
     },
   });
 

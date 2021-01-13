@@ -110,12 +110,31 @@ describe("GET data all People", () => {
     expect(serverResponse.statusCode).toEqual(200);
   });
 
-  // TODO: expectnya diganti
   test("return array", async () => {
+    const requestPayload = {
+      name: "Lelianto Eko Pradana",
+      status: "Fulltime",
+      role: "Front End Web Developer",
+      location: "Jakarta",
+      social_media: {
+        Linkedin: "https://www.linkedin.com/in/lelianto1/",
+        Github: "https://github.com/Lelianto",
+      },
+      tech_stack: ["React.js", "Nuxt.js", "Python", "Flask", "Javascript"],
+    };
+
+    await fastify.inject({
+      method: "POST",
+      url: "/api/people",
+      payload: requestPayload,
+    });
+
     const serverResponse = await fastify.inject({
       method: "GET",
       url: "/api/people",
     });
-    expect(serverResponse.json().data).toBeDefined();
+    console.warn(serverResponse.json());
+    expect(serverResponse.json().data[0].name).toEqual(requestPayload.name);
+    expect(serverResponse.json().data[0].id).toBeDefined();
   });
 });

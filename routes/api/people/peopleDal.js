@@ -24,9 +24,12 @@ const PeopleDal = (db) => {
   const getAllPeople = async () => {
     try {
       const data = await db.any("SELECT * FROM tb_people");
-      return data;
+      return { status: 200, data };
     } catch (err) {
-      throw new Error("Get All People:" + err);
+      return {
+        status: 500,
+        message: err.massage,
+      };
     }
   };
 
