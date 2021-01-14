@@ -156,13 +156,20 @@ describe("UPDATE endpoint people", () => {
       name: "Lelianto Eko Pradana",
       status: "Fulltime",
       role: "Front End Web Developer",
-      location: "Jakarta",
+      location: "Medan",
       social_media: {
         Linkedin: "https://www.linkedin.com/in/lelianto1/",
         Github: "https://github.com/Lelianto",
       },
       hired: true,
-      tech_stack: ["React.js", "Nuxt.js", "Python", "Flask", "Javascript"],
+      tech_stack: [
+        "React.js",
+        "Nuxt.js",
+        "Python",
+        "Flask",
+        "Javascript",
+        "GoLang",
+      ],
     };
 
     const postResponse = await fastify.inject({
@@ -179,5 +186,88 @@ describe("UPDATE endpoint people", () => {
 
     expect(serverResponse.statusCode).toEqual(200);
     expect(serverResponse.json().data.hired).toBeTruthy;
+  });
+
+  test("update location and tech_stack properties", async () => {
+    const requestPayload = {
+      name: "Lelianto Eko Pradana",
+      status: "Fulltime",
+      role: "Front End Web Developer",
+      location: "Jakarta",
+      social_media: {
+        Linkedin: "https://www.linkedin.com/in/lelianto1/",
+        Github: "https://github.com/Lelianto",
+      },
+      tech_stack: ["React.js", "Nuxt.js", "Python", "Flask", "Javascript"],
+    };
+
+    const requestPayloadUpdate = {
+      name: "Lelianto Eko Pradana",
+      status: "Fulltime",
+      role: "Front End Web Developer",
+      location: "Medan",
+      social_media: {
+        Linkedin: "https://www.linkedin.com/in/lelianto1/",
+        Github: "https://github.com/Lelianto",
+      },
+      hired: false,
+      tech_stack: [
+        "React.js",
+        "Nuxt.js",
+        "Python",
+        "Flask",
+        "Javascript",
+        "GoLang",
+      ],
+    };
+
+    const postResponse = await fastify.inject({
+      method: "POST",
+      url: "/api/people",
+      payload: requestPayload,
+    });
+
+    const serverResponse = await fastify.inject({
+      method: "PUT",
+      url: `/api/people/${Number(postResponse.json().data.id)}`,
+      payload: requestPayloadUpdate,
+    });
+
+    expect(serverResponse.statusCode).toEqual(200);
+    expect(serverResponse.json().data.location).toEqual(
+      requestPayloadUpdate.location
+    );
+    expect(serverResponse.json().data.tech_stack).toContain("GoLang");
+  });
+});
+
+describe("DELETE endpoint people", () => {
+  test("delete a people", async () => {
+    const requestPayload = {
+      name: "Lelianto Eko Pradana",
+      status: "Fulltime",
+      role: "Front End Web Developer",
+      location: "Jakarta",
+      social_media: {
+        Linkedin: "https://www.linkedin.com/in/lelianto1/",
+        Github: "https://github.com/Lelianto",
+      },
+      tech_stack: ["React.js", "Nuxt.js", "Python", "Flask", "Javascript"],
+    };
+
+    const postResponse = await fastify.inject({
+      method: "POST",
+      url: "/api/people",
+      payload: requestPayload,
+    });
+
+    const serverResponse = await fastify.inject({
+      method: "DELETE",
+      url: `/api/people/${Number(postResponse.json().data.id)}`,
+    });
+
+    expect(serverResponse.statusMessage).toEqual("OK");
+    expect(serverResponse.json().message).toEqual("Successful delete schema");
+    expect(serverResponse.json().status).toEqual(204);
   });
 });
