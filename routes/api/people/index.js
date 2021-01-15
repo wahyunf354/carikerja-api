@@ -53,9 +53,9 @@ module.exports = async function (fastify) {
         },
       },
     },
-    handler: async () => {
+    handler: async (request, reply) => {
       const result = await peopleDal.getAllPeople();
-      return result;
+      reply.code(200).send(result);
     },
   });
 
@@ -92,7 +92,8 @@ module.exports = async function (fastify) {
     handler: async (request) => {
       const { id } = request.params;
       const resultGet = await peopleDal.getPeopleById(id);
-      return { status: 200, data: resultGet[0] };
+
+      reply.code(200).send({ status: 200, data: resultGet[0] });
     },
   });
 
@@ -139,7 +140,7 @@ module.exports = async function (fastify) {
     handler: async (request, reply) => {
       const data = request.body;
       const result = await peopleDal.createPeople(data);
-      reply.send(result);
+      reply.code(200).send(result);
     },
   });
 
@@ -174,7 +175,7 @@ module.exports = async function (fastify) {
       const data = request.body;
       const { id } = request.params;
       const resultUpdate = await peopleDal.updatePeople(id, data);
-      reply.send({ status: 200, data: resultUpdate });
+      reply.code(200).send({ status: 200, data: resultUpdate });
     },
   });
 
@@ -203,10 +204,11 @@ module.exports = async function (fastify) {
         },
       },
     },
-    handler: async (request) => {
+    handler: async (request, reply) => {
       const { id } = request.params;
       const resultDelete = await peopleDal.deletePeople(id);
-      return { status: 204, ...resultDelete };
+
+      reply.code(204).send({ status: 204, ...resultDelete });
     },
   });
 };

@@ -15,8 +15,8 @@ API ini digunakan untuk aplikasi cari kerja yang di kembangkan oleh pak riza fah
 ---
 
 ## Todo
-- [ ] setup cors
-- [ ] refactoring code yang langsung return aja
-- [ ] add reply.status(200 || 204) in all enpoint
-- [ ] deploy to heroku
 
+- [x] setup cors
+- [ ] refactoring code yang langsung return aja
+- [x] add reply.code(200 || 204) in all enpoint
+- [ ] deploy to heroku

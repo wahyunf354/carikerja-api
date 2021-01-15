@@ -10,7 +10,7 @@ const EmployerDal = (db) => {
         ...data,
       };
     } catch (err) {
-      throw new Error("Crete data employer: ", err);
+      throw new Error("Crete data employer: ", err.message);
     }
   };
 

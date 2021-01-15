@@ -12,6 +12,7 @@ module.exports = async function (fastify) {
       description: "Enpoint to add a employer",
       body: {
         type: "object",
+        required: ["name", "category", "link", "description"],
         properties: {
           name: { type: "string" },
           category: { type: "string" },
@@ -41,7 +42,7 @@ module.exports = async function (fastify) {
     handler: async (request, reply) => {
       const data = request.body;
       const newEmployer = await employerDal.createEmployer(data);
-      reply.send({ status: 200, data: newEmployer });
+      reply.code(200).send({ status: 200, data: newEmployer });
     },
   });
 
@@ -73,9 +74,9 @@ module.exports = async function (fastify) {
         },
       },
     },
-    handler: async () => {
+    handler: async (request, reply) => {
       const data = await employerDal.getAllEmployer();
-      return { status: 200, data: data };
+      reply.code(200).send({ status: 200, data });
     },
   });
 
@@ -87,6 +88,7 @@ module.exports = async function (fastify) {
       description: ["Get one employer"],
       params: {
         type: "object",
+        required: ["id"],
         properties: {
           id: { type: "number" },
         },
@@ -110,11 +112,11 @@ module.exports = async function (fastify) {
         },
       },
     },
-    handler: async (request) => {
+    handler: async (request, reply) => {
       const { id } = request.params;
       const data = await employerDal.getEmployerById(id);
 
-      return { status: 200, data };
+      reply.code(200).send({ status: 200, data });
     },
   });
 
@@ -132,10 +134,11 @@ module.exports = async function (fastify) {
       },
       body: {
         type: "object",
+        required: ["name", "category", "link", "description"],
         properties: {
           name: { type: "string" },
           category: { type: "string" },
-          linkg: { type: "string" },
+          link: { type: "string" },
           description: { type: "string" },
         },
       },
@@ -163,7 +166,7 @@ module.exports = async function (fastify) {
       const { body } = request;
       const data = await employerDal.updateEmployer(id, body);
 
-      return { status: 200, data };
+      reply.code(200).send({ status: 200, data });
     },
   });
 
@@ -196,11 +199,11 @@ module.exports = async function (fastify) {
         },
       },
     },
-    handler: async (request) => {
+    handler: async (request, reply) => {
       const { id } = request.params;
       const message = await employerDal.deleteEmployerById(id);
 
-      return { status: 204, ...message };
+      reply.code(204).send({ status: 204, ...message });
     },
   });
 };
