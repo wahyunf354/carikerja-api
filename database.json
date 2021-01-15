@@ -1,6 +1,9 @@
 {
   "dev": {
-    "ENV": "HEROKU_POSTGRESQL_RED_URL"
+    "ENV": "DATABASE_URL"
+  },
+  "prod": {
+    "ENV": "DATABASE_URL"
   },
   "sql-file": true
 }

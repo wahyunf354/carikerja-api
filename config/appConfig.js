@@ -7,5 +7,5 @@ function loadConfigFromEnv(key) {
 }
 
 module.exports = {
-  postgresUri: loadConfigFromEnv("HEROKU_POSTGRESQL_RED_URL"),
+  postgresUri: loadConfigFromEnv("DATABASE_URL"),
 };
