@@ -6,7 +6,7 @@ const clearDatabaseSql = "DELETE FROM tb_employer;DELETE FROM tb_people;";
 
 module.exports = function setupEnvTest() {
   // setup envaronment test
-  process.env.POSTGRES_URL =
+  process.env.HEROKU_POSTGRESQL_RED_URL =
     "postgres://carikerja_admin:localhost@localhost:54/carikerja_db_test";
 
   // setup fastify server

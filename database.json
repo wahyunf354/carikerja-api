@@ -1,6 +1,6 @@
 {
   "dev": {
-    "ENV": "POSTGRES_URL"
+    "ENV": "HEROKU_POSTGRESQL_RED_URL"
   },
   "sql-file": true
 }
