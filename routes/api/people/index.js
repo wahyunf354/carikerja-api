@@ -89,7 +89,7 @@ module.exports = async function (fastify) {
         },
       },
     },
-    handler: async (request) => {
+    handler: async (request, reply) => {
       const { id } = request.params;
       const resultGet = await peopleDal.getPeopleById(id);
 

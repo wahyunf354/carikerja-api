@@ -138,6 +138,36 @@ describe("GET data all People", () => {
   });
 });
 
+describe("GET one people", () => {
+  test("should return obeject with name propertis", async () => {
+    const requestPayload = {
+      name: "Lelianto Eko Pradana",
+      status: "Fulltime",
+      role: "Front End Web Developer",
+      location: "Jakarta",
+      social_media: {
+        Linkedin: "https://www.linkedin.com/in/lelianto1/",
+        Github: "https://github.com/Lelianto",
+      },
+      tech_stack: ["React.js", "Nuxt.js", "Python", "Flask", "Javascript"],
+    };
+
+    const postResponse = await fastify.inject({
+      method: "POST",
+      url: "/api/people",
+      payload: requestPayload,
+    });
+
+    const serverResponse = await fastify.inject({
+      method: "GET",
+      url: `/api/people/${Number(postResponse.json().data.id)}`,
+    });
+
+    expect(serverResponse.statusCode).toEqual(200);
+    expect(serverResponse.json().data.name).toEqual(requestPayload.name);
+  });
+});
+
 describe("UPDATE endpoint people", () => {
   test("update hired properties", async () => {
     const requestPayload = {
@@ -266,7 +296,7 @@ describe("DELETE endpoint people", () => {
       url: `/api/people/${Number(postResponse.json().data.id)}`,
     });
 
-    expect(serverResponse.statusMessage).toEqual("OK");
+    expect(serverResponse.statusMessage).toEqual("No Content");
     expect(serverResponse.json().message).toEqual("Successful delete schema");
     expect(serverResponse.json().status).toEqual(204);
   });
