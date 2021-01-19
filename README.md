@@ -12,6 +12,8 @@ API ini digunakan untuk aplikasi cari kerja yang di kembangkan oleh pak riza fah
 
 ### Enpoint
 
+[Documentation](https://carikerja-api.vercel.app/documentation/)
+
 ---
 
 ## Todo
